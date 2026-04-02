@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Growth Strategy: Halifax & Gloucester</title>
+    <title>Clip 'n Climb Growth Strategy - Luke Davies</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Muli:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,63 +13,81 @@
             --orange: #ff8b00;
             --white: #ffffff;
             --gray: #f4f4f4;
+            --text: #333333;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        body { font-family: 'Muli', sans-serif; color: var(--purple); background: var(--white); }
-        h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; line-height: 1; }
+        body { font-family: 'Muli', sans-serif; color: var(--text); background: #eee; }
+        h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; line-height: 1; color: var(--purple); }
 
-        /* --- PDF PRINT ENGINE --- */
-        @page { size: A4 landscape; margin: 0; }
+        /* --- PDF PRINT ENGINE: A4 LANDSCAPE --- */
         @media print {
-            section { page-break-after: always; break-after: page; height: 210mm; width: 297mm; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+            body { background: none; }
+            section { 
+                page-break-after: always; 
+                break-after: page; 
+                width: 297mm; 
+                height: 210mm; 
+                display: flex; 
+                flex-direction: column; 
+                overflow: hidden; 
+                border: none !important;
+                background: white !important;
+            }
             .no-print { display: none; }
         }
 
-        section { padding: 40px 60px; min-height: 100vh; position: relative; border-bottom: 1px solid #eee; }
-        
-        .title-slide { background: var(--purple); color: var(--white); text-align: center; justify-content: center; }
-        .title-slide h1 { font-size: 90px; margin-bottom: 10px; letter-spacing: 2px; }
-        .title-slide p { font-size: 24px; opacity: 0.9; font-weight: 700; }
+        section { 
+            background: white; 
+            width: 297mm; 
+            height: 210mm; 
+            margin: 20px auto; 
+            padding: 40px 60px; 
+            position: relative; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+            display: flex;
+            flex-direction: column;
+        }
 
-        .scallop-top { position: absolute; top: 0; left: 0; width: 100%; height: 12px; background-image: radial-gradient(circle at 15px 15px, transparent 16px, var(--green) 17px); background-size: 30px 30px; }
-        
-        .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 4px solid var(--green); padding-bottom: 15px; }
-        .header-bar h2 { font-size: 50px; color: var(--purple); }
-        
-        .grid { display: flex; gap: 40px; }
-        .col { flex: 1; }
+        .title-slide { background: var(--purple) !important; color: white; justify-content: center; text-align: center; }
+        .title-slide h1 { font-size: 100px; color: white; letter-spacing: 2px; }
+        .title-slide p { font-size: 24px; font-weight: 700; color: var(--green); }
 
-        .card { background: var(--gray); padding: 30px; border-radius: 10px; height: 100%; border-top: 6px solid var(--blue); }
-        .card h3 { font-size: 32px; color: var(--blue); margin-bottom: 15px; }
+        .header-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; border-bottom: 5px solid var(--green); padding-bottom: 10px; }
+        .header-bar h2 { font-size: 55px; }
+        
+        .grid { display: flex; gap: 30px; flex: 1; }
+        .col { flex: 1; display: flex; flex-direction: column; }
+
+        .card { background: var(--gray); padding: 30px; border-radius: 12px; border-top: 8px solid var(--blue); flex: 1; }
+        .card h3 { font-size: 36px; color: var(--blue); margin-bottom: 15px; }
         
         ul { list-style: none; }
-        li { margin-bottom: 15px; padding-left: 25px; position: relative; font-size: 18px; font-weight: 700; }
-        li::before { content: '►'; position: absolute; left: 0; color: var(--orange); font-size: 14px; top: 4px; }
+        li { margin-bottom: 12px; padding-left: 25px; position: relative; font-size: 18px; font-weight: 700; line-height: 1.3; }
+        li::before { content: '►'; position: absolute; left: 0; color: var(--orange); font-size: 16px; top: 4px; }
 
-        /* Pie Chart Styles */
-        .chart-container { display: flex; justify-content: space-around; align-items: center; margin-top: 20px; }
+        .big-number { font-size: 80px; font-family: 'Bebas Neue'; color: var(--orange); line-height: 0.8; }
+        .caption { font-size: 14px; color: #666; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+
+        .chart-container { display: flex; justify-content: space-around; align-items: center; margin-top: 30px; flex: 1; }
         .chart-box { text-align: center; width: 30%; }
-        .chart-box svg { width: 180px; height: 180px; transform: rotate(-90deg); }
-        .chart-label { margin-top: 15px; font-weight: 900; font-size: 18px; }
+        .chart-box svg { width: 160px; height: 160px; transform: rotate(-90deg); margin-bottom: 15px; }
+        .stat-circle { stroke-dasharray: 100; stroke-width: 20; fill: none; stroke-linecap: round; }
+        .bg-circle { stroke: #e0e0e0; stroke-width: 20; fill: none; }
 
-        .stat-circle { stroke-dasharray: 100; stroke-width: 20; fill: none; }
-        .bg-circle { stroke: #ddd; stroke-width: 20; fill: none; }
-
-        .big-number { font-size: 60px; font-family: 'Bebas Neue'; color: var(--orange); line-height: 1; }
-        .caption { font-size: 14px; color: #666; font-weight: 700; text-transform: uppercase; }
-
-        .food-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-        .food-item { background: var(--purple); color: white; padding: 20px; border-radius: 8px; font-size: 16px; border-bottom: 4px solid var(--green); }
+        .food-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; flex: 1; }
+        .food-item { background: var(--purple); color: white; padding: 18px; border-radius: 8px; border-bottom: 5px solid var(--green); }
+        .food-item h4 { color: var(--green); font-size: 22px; margin-bottom: 5px; }
+        .food-item p { font-size: 14px; line-height: 1.3; font-weight: 700; }
     </style>
 </head>
 <body>
 
     <section class="title-slide">
-        <h3 style="color: var(--green); font-size: 30px; margin-bottom: 5px;">Phase 1: Pilot Attack</h3>
+        <h4 style="font-size: 35px; color: var(--green); margin-bottom: 0;">Clip 'n Climb Growth Strategy</h4>
         <h1>HALIFAX & GLOUCESTER</h1>
-        <p>90-Day Execution Plan & Search Visibility Roadmap</p>
-        <div style="margin-top: 40px; font-weight: 400; font-size: 18px;">STRATEGY BY: LUKE DAVIES</div>
+        <p>A 90-Day Vision for Search Dominance & Increased Bookings</p>
+        <div style="margin-top: 50px; font-weight: 700; font-size: 20px; opacity: 0.8;">PREPARED BY: LUKE DAVIES</div>
     </section>
 
     <section>
@@ -79,19 +97,19 @@
         </div>
         <div class="grid">
             <div class="col">
-                <p style="font-size: 24px; margin-bottom: 30px; font-weight: 700;">"SEO is just a tool. Bookings are the result."</p>
+                <p style="font-size: 26px; margin-bottom: 30px; font-weight: 900; font-style: italic; color: var(--purple);">"Driving high-intent parents directly to the 'Book Now' button."</p>
                 <div class="card">
                     <h3>Revenue Drivers</h3>
                     <ul>
-                        <li>Drive high-intent traffic directly to <strong>booking.clicknclimb.co.uk</strong>.</li>
-                        <li>Dominating regional searches for "Kids Birthday Parties" and "Family Activities."</li>
-                        <li>Capturing the "Desperate Searcher" (Last-minute rainy day activities).</li>
+                        <li>Streamline the journey to <strong>booking.clicknclimb.co.uk</strong>.</li>
+                        <li>Capturing "Active Intent" searchers in West Yorkshire & Gloucestershire.</li>
+                        <li>Dominating regional maps for family-centric searches.</li>
                     </ul>
                 </div>
             </div>
-            <div class="col" style="display: flex; flex-direction: column; justify-content: center; align-items: center; background: #f9f9f9; border-radius: 20px;">
-                <div class="big-number" style="font-size: 100px;">+ROI</div>
-                <p style="font-weight: 900; color: var(--purple); text-align: center; padding: 0 40px;">Our success is measured by the growth of the 'Book Now' conversion rate across both locations.</p>
+            <div class="col" style="background: var(--gray); border-radius: 15px; justify-content: center; align-items: center; text-align: center; padding: 40px;">
+                <div class="big-number" style="font-size: 120px; color: var(--green);">+ROI</div>
+                <p style="font-weight: 900; font-size: 22px; color: var(--purple);">Success is measured by booking conversions, not just clicks.</p>
             </div>
         </div>
     </section>
@@ -99,96 +117,60 @@
     <section>
         <div class="header-bar">
             <h2>Technical Health Audit</h2>
-            <div class="big-number">391 Issues Found</div>
+            <div class="big-number">391 Insights</div>
         </div>
-        <p style="margin-bottom: 20px; font-weight: 700;">A snapshot of the Halifax digital foundation. Most issues are "low friction" fixes that generate immediate results.</p>
+        <p style="font-weight: 700; font-size: 18px;">Our initial diagnostic highlights significant "Quick Win" opportunities to boost visibility immediately.</p>
         <div class="chart-container">
             <div class="chart-box">
                 <svg viewBox="0 0 42 42">
                     <circle class="bg-circle" cx="21" cy="21" r="15.915"></circle>
-                    <circle class="stat-circle" cx="21" cy="21" r="15.915" stroke="var(--orange)" stroke-dasharray="70 30"></circle>
+                    <circle class="stat-circle" cx="21" cy="21" r="15.915" stroke="var(--orange)" stroke-dasharray="85 15"></circle>
                 </svg>
-                <div class="chart-label">Backend Security (HSTS)</div>
-                <div class="caption">91 Critical Alerts</div>
+                <h3>Security Protocols</h3>
+                <div class="caption">91 Critical Items</div>
             </div>
             <div class="chart-box">
                 <svg viewBox="0 0 42 42">
                     <circle class="bg-circle" cx="21" cy="21" r="15.915"></circle>
-                    <circle class="stat-circle" cx="21" cy="21" r="15.915" stroke="var(--blue)" stroke-dasharray="45 55"></circle>
+                    <circle class="stat-circle" cx="21" cy="21" r="15.915" stroke="var(--blue)" stroke-dasharray="60 40"></circle>
                 </svg>
-                <div class="chart-label">Content Structure (H1)</div>
-                <div class="caption">45 Heading Errors</div>
+                <h3>Page Architecture</h3>
+                <div class="caption">45 Structure Fixes</div>
             </div>
             <div class="chart-box">
                 <svg viewBox="0 0 42 42">
                     <circle class="bg-circle" cx="21" cy="21" r="15.915"></circle>
-                    <circle class="stat-circle" cx="21" cy="21" r="15.915" stroke="var(--green)" stroke-dasharray="30 70"></circle>
+                    <circle class="stat-circle" cx="21" cy="21" r="15.915" stroke="var(--green)" stroke-dasharray="40 60"></circle>
                 </svg>
-                <div class="chart-label">Performance (Images)</div>
-                <div class="caption">31 Media Optimizations</div>
+                <h3>Media Assets</h3>
+                <div class="caption">31 Image Enhancements</div>
             </div>
         </div>
     </section>
 
     <section>
         <div class="header-bar">
-            <h2>Workflow Optimization</h2>
-            <div class="big-number">Zero Friction</div>
-        </div>
-        <div class="grid">
-            <div class="col">
-                <div class="card" style="border-top-color: var(--green);">
-                    <h3>Supporting Tech Resources</h3>
-                    <p style="margin-bottom: 20px;">We recognize that technical resources are currently at capacity. Our workflow is designed to **support, not add work.**</p>
-                    <ul>
-                        <li><strong>AI-Assisted Staging:</strong> We use AI to generate clean HTML for blogs/updates.</li>
-                        <li><strong>'Ready-to-Paste' Content:</strong> All SEO updates are provided in a final format that David can simply drop in.</li>
-                        <li><strong>Technical Autonomy:</strong> Using Editor access to handle metadata and tags without needing core developer hours.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                <div style="background: var(--purple); color: white; padding: 40px; border-radius: 50%; width: 300px; height: 300px; display: flex; flex-direction: column; justify-content: center; text-align: center;">
-                    <div class="big-number" style="color: var(--green);">AI</div>
-                    <p style="font-size: 14px; text-transform: uppercase; font-weight: 900;">Powered Workflow</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="header-bar">
-            <h2>The 90-Day Sprint</h2>
-            <div class="big-number">Weeks 1-12</div>
+            <h2>The Search Engine Engine</h2>
+            <div class="big-number">Google Data</div>
         </div>
         <div class="grid">
             <div class="col">
                 <div class="card" style="border-top-color: var(--purple);">
-                    <h3>Month 1: The Foundation</h3>
+                    <h3>Structured Data (Schema)</h3>
+                    <p style="margin-bottom: 15px; font-weight: 700;">Currently, the site lacks 'Schema Markup'—the hidden language Google uses to understand business data.</p>
                     <ul>
-                        <li>GA4 Tracking Audit (Verify Bookings).</li>
-                        <li>Fixing "Striking Distance" H1/Meta tags.</li>
-                        <li>Google Business Profile local optimization.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="border-top-color: var(--blue);">
-                    <h3>Month 2: The Authority</h3>
-                    <ul>
-                        <li>AI-Driven Local Content (4 Blogs/Month).</li>
-                        <li>Internal Linking for "Party" packages.</li>
-                        <li>Building the "Rainy Day" search moat.</li>
+                        <li><strong>Rich Snippets:</strong> Code that allows prices and party ratings to appear directly in search results.</li>
+                        <li><strong>Entity Linking:</strong> Hard-coding the site as a "Local Indoor Attraction" for maximum relevancy.</li>
                     </ul>
                 </div>
             </div>
             <div class="col">
                 <div class="card" style="border-top-color: var(--orange);">
-                    <h3>Month 3: The Scale</h3>
+                    <h3>Google Map Dominance</h3>
+                    <p style="margin-bottom: 15px; font-weight: 700;">Optimizing for the 'Local Pack' where the majority of mobile bookings originate.</p>
                     <ul>
-                        <li>Performance Review vs. Booking Baseline.</li>
-                        <li>Conversion Rate Optimization (CRO) tests.</li>
-                        <li>Blueprint ready for 80-location rollout.</li>
+                        <li><strong>Review Velocity:</strong> Strategic loops to increase local 5-star feedback.</li>
+                        <li><strong>Location Signal:</strong> Geo-tagging business assets to boost local map rankings.</li>
                     </ul>
                 </div>
             </div>
@@ -197,33 +179,128 @@
 
     <section>
         <div class="header-bar">
-            <h2>Food For Thought</h2>
-            <div class="big-number">Growth Ideas</div>
+            <h2>Operational Efficiency</h2>
+            <div class="big-number">Supporting David</div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <div class="card" style="border-top-color: var(--green);">
+                    <h3>Workflow Support</h3>
+                    <p style="margin-bottom: 20px; font-weight: 700;">Our workflow is designed to improve performance without increasing technical workload.</p>
+                    <ul>
+                        <li><strong>AI Content Staging:</strong> We provide "Ready-to-Paste" HTML for all updates.</li>
+                        <li><strong>Seamless Integration:</strong> SEO changes are delivered in a final format for quick verification and launch.</li>
+                        <li><strong>Technical Independence:</strong> Managing metadata and content to ensure high-velocity growth.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col" style="justify-content: center; align-items: center;">
+                <div style="border: 10px solid var(--purple); border-radius: 50%; width: 280px; height: 280px; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 20px;">
+                    <h3 style="font-size: 50px; color: var(--purple); margin: 0;">AI</h3>
+                    <p style="font-weight: 900; text-transform: uppercase; font-size: 14px;">Powered Workflow</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="header-bar">
+            <h2>AI Visibility & Content</h2>
+            <div class="big-number">The Future</div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <div class="card" style="border-top-color: var(--orange);">
+                    <h3>AI Answer Engine Optimization</h3>
+                    <ul>
+                        <li>Ensuring Clip 'n Climb is the <strong>primary recommendation</strong> in ChatGPT, Gemini, and Claude queries.</li>
+                        <li>Semantic keyword targeting for "Family Activities Near Me" AI results.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="border-top-color: var(--blue);">
+                    <h3>High-Intent Content Engine</h3>
+                    <ul>
+                        <li><strong>The Rainy Day Plan:</strong> Capturing parent traffic when the forecast turns poor.</li>
+                        <li><strong>Party Venue Authority:</strong> Dominating the "Best Kids Birthday Party" regional searches.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="header-bar">
+            <h2>The 90-Day Growth Sprint</h2>
+            <div class="big-number">Phase 1</div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <div class="card" style="border-top-color: var(--purple);">
+                    <h4>Month 1: Setup</h4>
+                    <p style="font-size: 14px; font-weight: 900; color: #777; margin-bottom: 10px;">FOUNDATION</p>
+                    <ul style="font-size: 15px;">
+                        <li>Verify Booking Conversion Data.</li>
+                        <li>Execute 391 technical 'Quick Wins'.</li>
+                        <li>Deploy Schema Markup.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="border-top-color: var(--blue);">
+                    <h4>Month 2: Velocity</h4>
+                    <p style="font-size: 14px; font-weight: 900; color: #777; margin-bottom: 10px;">AUTHORITY</p>
+                    <ul style="font-size: 15px;">
+                        <li>Launch AI Content Hubs.</li>
+                        <li>Build 'Rainy Day' Search Moat.</li>
+                        <li>Google Map Pack Optimization.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="border-top-color: var(--orange);">
+                    <h4>Month 3: Results</h4>
+                    <p style="font-size: 14px; font-weight: 900; color: #777; margin-bottom: 10px;">CONVERSION</p>
+                    <ul style="font-size: 15px;">
+                        <li>Review Actual Booking ROI.</li>
+                        <li>Refine Landing Page Flow.</li>
+                        <li>80-Location Rollout Proposal.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="header-bar">
+            <h2>Strategic Ideas</h2>
+            <div class="big-number">Vision</div>
         </div>
         <div class="food-grid">
             <div class="food-item">
-                <h4 style="color: var(--green); margin-bottom: 10px;">The "Toddler Morning" Moat</h4>
-                <p>Specific SEO landing pages to fill mid-week morning slots during school hours.</p>
+                <h4>Toddler Mornings</h4>
+                <p>Targeted SEO to fill quiet mid-week slots during school hours.</p>
             </div>
             <div class="food-item">
-                <h4 style="color: var(--green); margin-bottom: 10px;">Weather-Triggered Ads</h4>
-                <p>Scaling search visibility automatically when the local forecast predicts rain.</p>
+                <h4>Weather Ads</h4>
+                <p>Search boosts that trigger automatically based on the local forecast.</p>
             </div>
             <div class="food-item">
-                <h4 style="color: var(--green); margin-bottom: 10px;">The Party Upsell</h4>
-                <p>Optimizing for "Kids Party Venues" to increase the average order value per booking.</p>
+                <h4>The Party Upsell</h4>
+                <p>Capturing high-value "Best Party Venue" searches.</p>
             </div>
             <div class="food-item">
-                <h4 style="color: var(--green); margin-bottom: 10px;">Competitor Conquest</h4>
-                <p>Directly targeting parents searching for Soft Play or Cinemas in the local area.</p>
+                <h4>Competitor Capture</h4>
+                <p>Targeting parents searching for local cinemas or soft play centers.</p>
             </div>
             <div class="food-item">
-                <h4 style="color: var(--green); margin-bottom: 10px;">Automated Review Loop</h4>
-                <p>Using the booking system to trigger Google Reviews, boosting the Map ranking.</p>
+                <h4>Review Automation</h4>
+                <p>Scaling local reviews to cement #1 Map rankings.</p>
             </div>
             <div class="food-item">
-                <h4 style="color: var(--green); margin-bottom: 10px;">Teacher Incentive SEO</h4>
-                <p>Capturing school trip traffic via dedicated educational resource pages.</p>
+                <h4>School Trip Hub</h4>
+                <p>Dedicated resources to capture group and institutional bookings.</p>
             </div>
         </div>
     </section>
