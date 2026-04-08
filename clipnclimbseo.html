@@ -2,288 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Clip 'n Climb Growth Strategy - Luke Davies</title>
+    <title>Climb HQ: 30-Day Performance Sprint</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Muli:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --purple: #662D91;
-            --green: #c9d22a;
-            --blue: #009de0;
-            --orange: #ff8b00;
-            --white: #ffffff;
-            --gray: #f8f9fa;
+            --purple: #662D91; --green: #c9d22a; --blue: #009de0; --orange: #ff8b00; --white: #ffffff; --gray: #f8f9fa;
         }
-
-        /* HARD SYSTEM RESET */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        
         @page { size: A4 landscape; margin: 0; }
-
-        body { font-family: 'Muli', sans-serif; background: #555; color: #333; }
-
-        /* FIXED A4 LANDSCAPE CONTAINER */
+        body { font-family: 'Muli', sans-serif; background: #333; color: #333; }
+        
         section {
-            width: 297mm;
-            height: 210mm;
-            padding: 20mm;
-            margin: 10px auto; /* Centered on screen */
-            background: white;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            page-break-after: always;
-            break-after: page;
+            width: 297mm; height: 210mm; padding: 15mm 20mm; margin: 10px auto;
+            background: white; position: relative; display: flex; flex-direction: column;
+            page-break-after: always; break-after: page;
         }
 
-        @media print {
-            body { background: none; }
-            section { margin: 0; border: none; }
-        }
+        /* LOGO BOX - Encoded for the spaces in your filename */
+        .logo-box { position: absolute; top: 10mm; right: 20mm; width: 60mm; height: 25mm; display: flex; align-items: center; justify-content: flex-end; }
+        .logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        @media print { body { background: none; } section { margin: 0; } }
 
         h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; line-height: 1; color: var(--purple); }
-
-        /* HEADER BOX */
-        .header-bar { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            margin-bottom: 10mm; 
-            border-bottom: 4px solid var(--green); 
-            padding-bottom: 5mm; 
-            flex-shrink: 0;
-        }
+        .header-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8mm; border-bottom: 4px solid var(--green); padding-bottom: 3mm; flex-shrink: 0; }
         .header-bar h2 { font-size: 45pt; }
-        .big-number { font-size: 70pt; color: var(--orange); line-height: 0.8; }
+        .big-number { font-size: 50pt; color: var(--orange); letter-spacing: -2px; }
 
-        /* GRID SYSTEM */
-        .grid { display: flex; gap: 10mm; flex-grow: 1; min-height: 0; }
-        .col { flex: 1; display: flex; flex-direction: column; gap: 5mm; }
+        .grid { display: flex; gap: 8mm; flex-grow: 1; min-height: 0; }
+        .col { flex: 1; display: flex; flex-direction: column; gap: 4mm; }
 
-        .card { background: var(--gray); padding: 7mm; border-radius: 8px; border-top: 6px solid var(--blue); flex-grow: 1; }
-        .card h3 { font-size: 28pt; color: var(--blue); margin-bottom: 4mm; }
+        .card { background: var(--gray); padding: 5mm; border-radius: 12px; border-top: 8px solid var(--blue); flex-grow: 1; position: relative; }
+        .card h3 { font-size: 22pt; color: var(--blue); margin-bottom: 3mm; }
         
         ul { list-style: none; }
-        li { margin-bottom: 3mm; padding-left: 6mm; position: relative; font-size: 14pt; font-weight: 700; line-height: 1.2; }
-        li::before { content: '►'; position: absolute; left: 0; color: var(--orange); font-size: 12pt; top: 2px; }
+        li { margin-bottom: 2mm; padding-left: 5mm; position: relative; font-size: 13pt; font-weight: 700; line-height: 1.2; }
+        li::before { content: '►'; position: absolute; left: 0; color: var(--orange); font-size: 10pt; top: 2px; }
 
-        /* AUDIT TABLE */
-        .audit-table { width: 100%; border-collapse: collapse; margin-top: 5mm; }
-        .audit-table th { background: var(--purple); color: white; text-align: left; padding: 3mm; font-family: 'Bebas Neue'; font-size: 16pt; }
-        .audit-table td { padding: 2.5mm 3mm; border-bottom: 1px solid #ddd; font-weight: 700; font-size: 11pt; }
-        .priority-crit { color: #d9534f; }
+        /* BEEFED UP AUDIT GRAPHICS */
+        .gauge-container { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+        .gauge-label { font-weight: 900; font-size: 10pt; width: 100px; color: #555; }
+        .gauge-track { flex: 1; background: #ddd; height: 12px; border-radius: 6px; overflow: hidden; position: relative; }
+        .gauge-fill { height: 100%; background: linear-gradient(90deg, var(--orange), #ff4400); border-radius: 6px; }
+        .gauge-val { font-family: 'Bebas Neue'; font-size: 14pt; width: 40px; text-align: right; }
 
-        /* ROADMAP BOXES */
-        .roadmap-box { border-left: 6px solid var(--purple); padding-left: 5mm; margin-bottom: 5mm; }
-        .roadmap-box h4 { font-size: 24pt; color: var(--blue); }
-        .roadmap-box p { font-weight: 800; font-size: 12pt; color: #555; }
+        .audit-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5mm; }
+        .summary-box { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; text-align: center; }
+        .summary-box span { display: block; font-family: 'Bebas Neue'; font-size: 28pt; color: var(--purple); }
+        .summary-box label { font-size: 8pt; font-weight: 900; color: #999; text-transform: uppercase; }
 
-        /* FOOD GRID */
-        .food-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 5mm; flex-grow: 1; }
-        .food-item { background: var(--purple); color: white; padding: 5mm; border-radius: 6px; border-bottom: 4px solid var(--green); }
-        .food-item h4 { color: var(--green); font-size: 20pt; margin-bottom: 2mm; }
-        .food-item p { font-size: 11pt; font-weight: 700; }
+        .step-num { position: absolute; top: -10px; left: -10px; background: var(--purple); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14pt; border: 3px solid white; }
     </style>
 </head>
 <body>
 
     <section style="background: var(--purple) !important; color: white; text-align: center; justify-content: center;">
-        <h4 style="font-size: 30pt; color: var(--green); margin-bottom: 5mm;">Strategic Growth Framework</h4>
+        <div class="logo-box">
+            <img src="clip%20n%20climb%20.png" alt="Climb HQ Logo">
+        </div>
+        <h4 style="font-size: 28pt; color: var(--green); margin-bottom: 5mm;">The 30-Day Performance Sprint</h4>
         <h1 style="font-size: 90pt; color: white;">HALIFAX & GLOUCESTER</h1>
-        <p style="font-size: 20pt; font-weight: 700; color: var(--green);">90-Day Execution Plan & Search Dominance</p>
-        <p style="margin-top: 15mm; font-weight: 700; font-size: 16pt; opacity: 0.8;">Luke Davies | Strategic Consultant</p>
+        <p style="font-size: 22pt; font-weight: 700; color: var(--green);">Protecting the Pilot & Securing National ROI</p>
     </section>
 
     <section>
+        <div class="logo-box"><img src="clip%20n%20climb%20.png"></div>
         <div class="header-bar">
-            <h2>The Primary Objective</h2>
-            <div class="big-number">Goal</div>
+            <h2>The 30-Day Priority</h2>
+            <div class="big-number">Sprint</div>
         </div>
         <div class="grid">
             <div class="col">
-                <p style="font-size: 22pt; margin-bottom: 8mm; font-weight: 900; color: var(--purple);">"Transitioning from Search Visibility to Booking Velocity."</p>
+                <p style="font-size: 20pt; font-weight: 900; color: var(--purple); margin-bottom: 4mm;">Maximizing the final month of the trial period.</p>
                 <div class="card" style="border-top-color: var(--purple);">
-                    <h3>Success Metrics</h3>
+                    <h3>Immediate Value Capture</h3>
                     <ul>
-                        <li>Direct attribution to <strong>booking.clicknclimb.co.uk</strong>.</li>
-                        <li>Capturing 100% of 'High Intent' local traffic.</li>
-                        <li>Establishing an unshakeable Search Moat.</li>
+                        <li><strong>Stop Revenue Leakage:</strong> Patching the 40x/30x technical errors that disrupt the booking journey.</li>
+                        <li><strong>Map Dominance:</strong> Rapid optimization of Google Business Profiles to capture mobile searchers.</li>
+                        <li><strong>Data Hardening:</strong> Ensuring 100% of search-to-booking conversions are tracked for the trial report.</li>
                     </ul>
                 </div>
             </div>
-            <div class="col" style="background: var(--gray); border-radius: 15px; justify-content: center; align-items: center; padding: 10mm; text-align: center;">
-                <div class="big-number" style="font-size: 100pt; color: var(--green);">ROI</div>
-                <p style="font-weight: 900; font-size: 18pt;">The Pilot for National Expansion.</p>
+            <div class="col">
+                <div class="card" style="background: var(--purple); color: white; border-top: none; justify-content: center; text-align: center; padding: 15mm;">
+                    <h3 style="color: var(--green); font-size: 35pt;">Goal: ROI Proof</h3>
+                    <p style="font-size: 16pt; font-weight: 700; line-height: 1.4; margin-top: 5mm;">We aren't just looking for clicks. We are looking for <strong>Booked Sessions</strong>. This 30-day sprint ensures the infrastructure is ready to convert at scale.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section>
+        <div class="logo-box"><img src="clip%20n%20climb%20.png"></div>
         <div class="header-bar">
-            <h2>The Execution Timeline</h2>
-            <div class="big-number">90 Days</div>
+            <h2>Systemic Site Health</h2>
+            <div class="big-number">Audit</div>
         </div>
         <div class="grid">
             <div class="col">
-                <div class="roadmap-box">
-                    <h4>Month 1: The Plumbing</h4>
-                    <ul style="font-size: 13pt;">
-                        <li>Verify GA4 Conversion Tracking.</li>
-                        <li>Fix 'Critical' Tech Fixes (391 Alerts).</li>
-                        <li>Map Pack & GBP Dominance.</li>
-                    </ul>
-                </div>
-                <div class="roadmap-box" style="border-left-color: var(--blue);">
-                    <h4>Month 2: The Content Moat</h4>
-                    <ul style="font-size: 13pt;">
-                        <li>AI-Assisted Local Content Hubs.</li>
-                        <li>Semantic 'Party' Optimization.</li>
-                        <li>Answer Engine Optimization (LLM).</li>
-                    </ul>
+                <h3 style="text-align: center; color: var(--purple);">HALIFAX STATUS</h3>
+                <div class="card" style="background: #fff; border: 1px solid #ddd;">
+                    <div class="gauge-container"><div class="gauge-label">Security</div><div class="gauge-track"><div class="gauge-fill" style="width: 91%;"></div></div><div class="gauge-val">91</div></div>
+                    <div class="gauge-container"><div class="gauge-label">Infrastructure</div><div class="gauge-track"><div class="gauge-fill" style="width: 45%; background: var(--blue);"></div></div><div class="gauge-val">45</div></div>
+                    <div class="gauge-container"><div class="gauge-label">Revenue Risk</div><div class="gauge-track"><div class="gauge-fill" style="width: 27%; background: #d9534f;"></div></div><div class="gauge-val">27</div></div>
+                    <div class="audit-summary">
+                        <div class="summary-box"><span>391</span><label>Total Fixes</label></div>
+                        <div class="summary-box"><span style="color:#d9534f;">Critical</span><label>Urgency</label></div>
+                    </div>
                 </div>
             </div>
             <div class="col">
-                <div class="roadmap-box" style="border-left-color: var(--orange);">
-                    <h4>Month 3: The Scale</h4>
-                    <ul style="font-size: 13pt;">
-                        <li>Conversion Rate (CRO) Testing.</li>
-                        <li>Automated Review Acquisition.</li>
-                        <li>80-Location Rollout Proposal.</li>
-                    </ul>
-                </div>
-                <div class="card" style="border-top-color: var(--green); flex-grow: 0;">
-                    <p style="font-weight: 900; font-size: 14pt;">"Scaling from individual site management to a centralized growth engine."</p>
+                <h3 style="text-align: center; color: var(--blue);">GLOUCESTER STATUS</h3>
+                <div class="card" style="background: #fff; border: 1px solid #ddd;">
+                    <p style="font-weight: 900; color: #555; margin-bottom: 10px;">Systemic Mirroring Confirmed:</p>
+                    <div class="gauge-container"><div class="gauge-label">Mapping</div><div class="gauge-track"><div class="gauge-fill" style="width: 75%; background: var(--blue);"></div></div><div class="gauge-val">75%</div></div>
+                    <div class="gauge-container"><div class="gauge-label">Sync Rate</div><div class="gauge-track"><div class="gauge-fill" style="width: 88%; background: var(--green);"></div></div><div class="gauge-val">88%</div></div>
+                    <p style="font-size: 11pt; font-weight: 700; margin-top: 10px; color: #777;">Because Halifax and Gloucester share a tech stack, the architecture for one is the fix for both. We deploy once, win twice.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section>
-        <div class="header-bar">
-            <h2>Audit: Halifax Baseline</h2>
-            <div class="big-number">391</div>
-        </div>
-        <p style="font-weight: 800; color: #555; margin-bottom: 5mm;">Infrastructure scan of halifax.clipnclimb.co.uk | 27 Critical / 90 Alert Level Issues.</p>
-        <table class="audit-table">
-            <thead>
-                <tr>
-                    <th>Issue Type</th>
-                    <th>Volume</th>
-                    <th>Priority</th>
-                    <th>Risk Factor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Missing HSTS Security Headers</td><td>91</td><td class="priority-crit">CRITICAL</td><td>Security & Trust Scores</td></tr>
-                <tr><td>Media Types / Missing Size Attributes</td><td>59</td><td>ALERT</td><td>Mobile Page Speed (UX)</td></tr>
-                <tr><td>URLs with Underscore Characters</td><td>32</td><td>ALERT</td><td>Crawl Budget Efficiency</td></tr>
-                <tr><td>Broken Links / 40x Status Codes</td><td>24</td><td class="priority-crit">CRITICAL</td><td>Revenue Leakage</td></tr>
-                <tr><td>Duplicate / Missing Meta Descriptions</td><td>31</td><td>ALERT</td><td>Click-Through Rate (CTR)</td></tr>
-                <tr><td>Heading Order Violation (H1-H6)</td><td>23</td><td>ALERT</td><td>Content Hierarchy</td></tr>
-                <tr><td>Time to First Byte (TTFB)</td><td>6</td><td>ALERT</td><td>Global Performance Rank</td></tr>
-            </tbody>
-        </table>
-        <div style="margin-top: 8mm; display: flex; gap: 10mm;">
-            <div style="flex: 1; border-left: 10px solid #d9534f; background: #fff5f5; padding: 4mm;">
-                <p><strong>Revenue Loss:</strong> 40x codes on booking paths.</p>
-            </div>
-            <div style="flex: 1; border-left: 10px solid #f0ad4e; background: #fffcf0; padding: 4mm;">
-                <p><strong>Visibility Gap:</strong> Poor metadata hinders Rich Snippets.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
+        <div class="logo-box"><img src="clip%20n%20climb%20.png"></div>
         <div class="header-bar">
             <h2>Operational Workflow</h2>
-            <div class="big-number">Zero Friction</div>
-        </div>
-        <div class="grid">
-            <div class="col">
-                <div class="card" style="border-top-color: var(--green);">
-                    <h3>Workflow Support</h3>
-                    <p style="margin-bottom: 4mm; font-weight: 700;">Results without adding work to existing technical teams.</p>
-                    <ul>
-                        <li><strong>AI Content Staging:</strong> "Ready-to-Paste" content units.</li>
-                        <li><strong>Non-Intrusive SEO:</strong> Metadata & Schema managed independently.</li>
-                        <li><strong>Support for David:</strong> Providing prioritized, clear technical actions.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col" style="justify-content: center; align-items: center; border: 5px dashed var(--purple); border-radius: 15px;">
-                <h3 style="font-size: 40pt;">AI AUTOMATION</h3>
-                <p style="font-weight: 900; color: var(--purple);">The engine that scales to 80 sites.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="header-bar">
-            <h2>Search Engine Architecture</h2>
-            <div class="big-number">Data</div>
+            <div class="big-number">Strategy</div>
         </div>
         <div class="grid">
             <div class="col">
                 <div class="card">
-                    <h3>Structured Data (Schema)</h3>
-                    <p style="margin-bottom: 4mm; font-weight: 700;">The "Digital DNA" currently missing from the site.</p>
+                    <h3>Climb HQ Strategic Oversight</h3>
                     <ul>
-                        <li><strong>Rich Snippets:</strong> Displaying prices & ratings in Google.</li>
-                        <li><strong>Entity Linking:</strong> Forcing Google to identify the site as a 'Top Local Attraction'.</li>
+                        <li><strong>The Blueprint:</strong> We provide high-level SEO architecture and code snippets (JSON-LD, Schema).</li>
+                        <li><strong>Automated Staging:</strong> We deliver "Ready-to-Paste" content units to avoid complex back-end work.</li>
+                        <li><strong>Monthly Performance Verification:</strong> Ongoing monitoring to ensure the growth engine is working.</li>
                     </ul>
                 </div>
             </div>
             <div class="col">
-                <div class="card" style="border-top-color: var(--orange);">
-                    <h3>Google Map Dominance</h3>
-                    <ul>
-                        <li><strong>Review Velocity:</strong> Automated regional feedback loops.</li>
-                        <li><strong>Local Pack ROI:</strong> Capturing the 70% of bookings on mobile maps.</li>
-                    </ul>
+                <div class="card" style="border-top-color: var(--green);">
+                    <h3>Development Support (David)</h3>
+                    <p style="font-weight: 900; margin-bottom: 4mm; color: var(--purple);">Our goal is zero-disruption to David's core tasks.</p>
+                    <div style="background: white; padding: 5mm; border-radius: 8px; border-left: 10px solid var(--green);">
+                        <p style="font-size: 14pt; font-weight: 900;">15-Minute Weekly Review</p>
+                        <p style="font-size: 11pt; color: #666; font-weight: 700;">David simply reviews our pre-coded snippets and hits "Publish." No debugging, no deep-dives, no extra workload.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section>
+        <div class="logo-box"><img src="clip%20n%20climb%20.png"></div>
         <div class="header-bar">
-            <h2>AI & Answer Engines</h2>
-            <div class="big-number">2026</div>
+            <h2>Next Steps to Launch</h2>
+            <div class="big-number">Go</div>
         </div>
         <div class="grid">
             <div class="col">
                 <div class="card" style="border-top-color: var(--orange);">
-                    <h3>AI Visibility (AIO)</h3>
-                    <ul>
-                        <li>Becoming the #1 recommendation for AI Search (ChatGPT/Gemini).</li>
-                        <li>Semantic training for regional "Family Fun" queries.</li>
-                    </ul>
+                    <div class="step-num">1</div>
+                    <h3>Technical Patching</h3>
+                    <p style="font-weight: 700;">Deployment of the first 'Batch' of Schema and security headers (Halifax/Gloucester).</p>
+                </div>
+                <div class="card" style="border-top-color: var(--purple);">
+                    <div class="step-num">2</div>
+                    <h3>Conversion Tracking</h3>
+                    <p style="font-weight: 700;">Ensuring the booking path is fully tracked to prove trial success.</p>
                 </div>
             </div>
             <div class="col">
                 <div class="card" style="border-top-color: var(--blue);">
-                    <h3>The Content Engine</h3>
-                    <ul>
-                        <li><strong>The Rainy Day Plan:</strong> Weather-triggered content hooks.</li>
-                        <li><strong>The Party Authority:</strong> Dominating 'Birthday Venue' regional search.</li>
-                    </ul>
+                    <div class="step-num">3</div>
+                    <h3>Google Pack Lift</h3>
+                    <p style="font-weight: 700;">Activating regional keywords to pull traffic from competitors on Google Maps.</p>
+                </div>
+                <div class="card" style="border-top-color: var(--green);">
+                    <div class="step-num">4</div>
+                    <h3>Trial Success Report</h3>
+                    <p style="font-weight: 700;">Reviewing the 30-day uplift and presenting the national rollout roadmap.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="header-bar">
-            <h2>Strategic Ideas</h2>
-            <div class="big-number">Vision</div>
-        </div>
-        <div class="food-grid">
-            <div class="food-item"><h4>Toddler Mornings</h4><p>Filling mid-week school-hour slots via niche landing pages.</p></div>
-            <div class="food-item"><h4>Weather-Linked Search</h4><p>Visibility that scales automatically when rain is forecast.</p></div>
-            <div class="food-item"><h4>The Party Upsell</h4><p>Targeting high-value regional 'Birthday' traffic.</p></div>
-            <div class="food-item"><h4>Competitor Capture</h4><p>Targeting searches for Cinemas and local Soft Play.</p></div>
-            <div class="food-item"><h4>Review Loops</h4><p>Scaling Google Feedback to cement #1 Map rankings.</p></div>
-            <div class="food-item"><h4>School Trip Hub</h4><p>Resources to capture group and institutional bookings.</p></div>
         </div>
     </section>
 
